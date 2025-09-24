@@ -5,11 +5,25 @@ import ProductCard from "../../Product/ProductCard";
 import { DataContext } from "../../DataProvider/DataProvider";
 import CurrencyFormat from "../../CurrencyFormat/CurrencyFormat";
 import { Link } from "react-router";
+import { Type } from "../../Utility/action.type";
 function Cart() {
   const [{ basket, user }, dispatch] = useContext(DataContext);
   const total = basket.reduce((amount, item) => {
     return item.price * item.amount + amount;
   }, 0);
+  const increment = (item) => {
+    dispatch({
+      type: Type.ADD_TO_BASKET,
+      item,
+    });
+  };
+  const decrement = (id) => {
+    dispatch({
+      type: Type.REMOVE_FROM_BASKET,
+      id,
+    });
+  };
+
   console.log(basket);
   return (
     <Layout>
@@ -23,18 +37,35 @@ function Cart() {
           ) : (
             basket?.map((item, i) => {
               return (
-                <ProductCard
-                  key={i}
-                  product={item}
-                  renderDesc={true}
-                  renderAdd={false}
-                  flex={true}
-                />
+                <section className={classes.cart_product}>
+                  <ProductCard
+                    key={i}
+                    product={item}
+                    renderDesc={true}
+                    renderAdd={false}
+                    flex={true}
+                  />
+                  <div className={classes.btn_container}>
+                    <button
+                      className={classes.btn}
+                      onClick={() => increment(item)}
+                    >
+                      +
+                    </button>
+                    <span>{item.amount}</span>
+                    <button
+                      className={classes.btn}
+                      onClick={() => increment(item.id)}
+                    >
+                      -
+                    </button>
+                  </div>
+                </section>
               );
             })
           )}
         </div>
-        {basket?.length != 0 && (
+        {basket?.length !== 0 && (
           <div className={classes.subtotal}>
             <div>
               <p>Subtotal ({basket?.length}items)</p>

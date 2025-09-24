@@ -7,6 +7,26 @@
 .container img {
   width: 100px !important ;
 }
+.cart_product {
+  display: flex;
+  gap: 10px;
+}
+.btn_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.btn {
+  padding: 5px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
 .cart__container {
   padding: 20px;
 }

@@ -26,9 +26,9 @@ function Product() {
           {products.map((singleProduct) => {
             return (
               <ProductCard
+                renderAdd={true}
                 key={singleProduct.id}
                 product={singleProduct}
-                renderAdd={true}
               />
             );
           })}

@@ -55,7 +55,7 @@ function Cart() {
                     <span>{item.amount}</span>
                     <button
                       className={classes.btn}
-                      onClick={() => increment(item.id)}
+                      onClick={() => decrement(item.id)}
                     >
                       -
                     </button>

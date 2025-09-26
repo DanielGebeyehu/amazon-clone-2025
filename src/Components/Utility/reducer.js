@@ -13,26 +13,24 @@ export const reducer = (state, action) => {
       );
 
       if (!existingItem) {
-        // If item does not exist, add it with amount 1
         return {
           ...state,
           basket: [...state.basket, { ...action.item, amount: 1 }],
         };
       } else {
-        // If item exists, increment amount
         const updatedBasket = state.basket.map((item) =>
           item.id === action.item.id
             ? { ...item, amount: item.amount + 1 }
             : item
         );
-
         return {
           ...state,
           basket: updatedBasket,
         };
       }
+
     case Type.REMOVE_FROM_BASKET:
-      const index = state.basket.findIndex(item => item.id === action.id);
+      const index = state.basket.findIndex((item) => item.id === action.id);
       let newBasket = [...state.basket];
 
       if (index >= 0) {
@@ -49,6 +47,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         basket: newBasket,
+      };
+    case Type.EMPTY_BASKET:
+      return {
+        ...state,
+        basket: [],
+      };
+    case Type.SET_USER:
+      return {
+        ...state,
+        user: action.user,
       };
 
     default:

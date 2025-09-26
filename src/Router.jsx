@@ -9,6 +9,7 @@ import Results from "./Components/Pages/Results/Results";
 import ProductDetail from "./Components/Pages/ProductDetail/ProductDetail";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 const stripePromise = loadStripe(
   "pk_test_51SAM21QzVoa9b3jrONvj94jYJwGxA5oddyKZt986BxLv69uGrm8qFa8Pqfx5ho846Bc2XCrDvMZipOgrKO88uKMU00SefBLGpy"
 );
@@ -17,13 +18,15 @@ function Router() {
     <Routerr>
       <Routes>
         <Route path="/" element={<Landing />} />
-       
+
         <Route
           path="/payments"
           element={
-            <Elements stripe = {stripePromise}>
-              <Payment />
-            </Elements>
+            <ProtectedRoute msg = {"You must log in to pay"} redirect={"/payments"}>
+              <Elements stripe={stripePromise}>
+                <Payment />
+              </Elements>
+            </ProtectedRoute>
           }
         />
         <Route path="/orders" element={<Orders />} />

@@ -10,6 +10,7 @@ import {
 import { ClipLoader } from "react-spinners";
 import { DataContext } from "../../DataProvider/DataProvider";
 import { Type } from "../../Utility/action.type";
+import { useLocation } from "react-router-dom";
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,8 @@ function Auth() {
 
   const [{ user }, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
+  const navStateData = useLocation();
+  console.log(navStateData);
 
   console.log(user);
   const authHandler = async (e) => {
